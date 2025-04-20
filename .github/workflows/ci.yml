@@ -26,4 +26,5 @@ jobs:
         run: npm test --if-present
 
       - name: Build do projeto
-        run: npm run build
+        run: npm run build # Este é um workflow de integração contínua
+
