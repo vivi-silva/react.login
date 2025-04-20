@@ -6,8 +6,8 @@ function App() {
     <div className="App">
       <h2>Login</h2>
       <form>
-        <input type="text" placeholder="Usuário" /><br />
-        <input type="password" placeholder="Senha" /><br />
+        <input type="text" placeholder="Usuário" />
+        <input type="password" placeholder="Senha" />
         <button type="submit">Entrar</button>
       </form>
     </div>
@@ -15,4 +15,5 @@ function App() {
 }
 
 export default App;
+
 
