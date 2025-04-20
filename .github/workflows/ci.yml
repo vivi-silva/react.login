@@ -2,9 +2,9 @@ name: React App CI
 
 on:
   push:
-    branches: [ login-component ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ login-component ]
+    branches: [ "**" ]
 
 jobs:
   build:
