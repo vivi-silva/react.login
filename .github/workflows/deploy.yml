@@ -2,7 +2,7 @@ name: Deploy React App
 
 on:
   push:
-    branches: [ "**" ]
+    branches: [ login-component ]
 
 jobs:
   deploy:
@@ -23,13 +23,11 @@ jobs:
       - name: Build do projeto
         run: npm run build
 
-      - name: Configurar identidade do Git
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-
       - name: Deploy para GitHub Pages
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+
+
 
