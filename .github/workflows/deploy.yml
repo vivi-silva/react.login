@@ -23,6 +23,11 @@ jobs:
       - name: Build do projeto
         run: npm run build
 
+      - name: Configurar identidade do Git
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
       - name: Deploy para GitHub Pages
         run: npm run deploy
         env:
