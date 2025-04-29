@@ -1,0 +1,23 @@
+name: Enviar alerta para o Discord
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  alert:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar alerta para o Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"🚨 Novo push ou merge na main! Commit: ${{ github.event.head_commit.message }} por ${{ github.event.head_commit.author.name }}\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
