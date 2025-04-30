@@ -20,4 +20,24 @@ jobs:
         run: npm install
 
       - name: Roda os testes
-        run: npm test -- --watchAll=false
+        id: rodar_testes
+        run: |
+          set -e
+          npm test -- --watchAll=false
+
+      - name: Enviar resultado para Discord (Sucesso)
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"✅ Testes passaram com sucesso na PR #${{ github.event.pull_request.number }} por ${{ github.event.pull_request.user.login }}.\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Enviar resultado para Discord (Falha)
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"❌ Testes falharam na PR #${{ github.event.pull_request.number }} por ${{ github.event.pull_request.user.login }}.\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
