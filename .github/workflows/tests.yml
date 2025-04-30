@@ -1,0 +1,23 @@
+name: Run React Tests
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Setup do Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instala dependências
+        run: npm install
+
+      - name: Roda os testes
+        run: npm test -- --watchAll=false
